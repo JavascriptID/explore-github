@@ -11,14 +11,6 @@
       :repositories="userRepositories"
       v-if="showingRepoData">
     </repository-list>
-
-    <user-profile-action 
-      :userShowing="userShowing"
-      :repos="userData.public_repos" 
-      :followers="userData.followers" 
-      :following="userData.following" 
-      v-if="showingUserData">
-    </user-profile-action>
     
   </div>
 </template>
@@ -27,12 +19,11 @@
 
 import { mapGetters } from 'vuex'
 import UserProfile from 'components/UserProfile'
-import UserProfileAction from 'components/UserProfileAction'
 import RepositoryList from 'components/RepositoryList'
 
 export default {
-  name: 'profile',
-  components: {UserProfile, UserProfileAction, RepositoryList},
+  name: 'ProfilePage',
+  components: {UserProfile, RepositoryList},
   computed: {
     showingUserData: function () {
       let self = this
@@ -51,13 +42,19 @@ export default {
     },
     ...mapGetters(['isBookmarkUser', 'userData', 'userRepositories'])   
   },
-  mounted () {
-    if (this.userData === null) {
-      this.$store.dispatch('getUserData', this.userShowing)
-      this.$store.dispatch('getUserRepositories', this.userShowing)
-    } else if (this.userData.login !== this.userShowing) {
-      this.$store.dispatch('getUserData', this.userShowing)
-      this.$store.dispatch('getUserRepositories', this.userShowing)
+  activated () {
+    let self = this
+    let callApi = () => {      
+      self.$store.dispatch('getUserData', self.userShowing)
+      setTimeout(() => {
+        self.$store.dispatch('getUserRepositories', self.userShowing)
+      }, 1000)
+    }
+    
+    if (self.userData === null) {
+      callApi()
+    } else if (self.userData.login !== self.userShowing) {
+      callApi()
     }
   }
 }

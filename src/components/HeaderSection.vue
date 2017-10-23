@@ -2,21 +2,21 @@
   <header class="header">  
     <div class="header__sticky">
       <div class="header__nav">
-        <button class="header__hamburger" @click="toggleSidebar">
+        <a class="header__hamburger" href="javascript:void(0)" @click="toggleSidebar" title="Open Sidebar">
           <i class="fa fa-bars"></i>
-        </button>
+        </a>
       </div>
       <div class="header__content">
           <router-link to="/">
               <img class="header__brand" 
-                    src="/explore-github/static/images/logo.png" 
+                    v-lazy="'/explore-github/static/images/github-explorer-white.png'" 
                     alt="Brand">
           </router-link>
       </div>
-      <div class="header__nav">
-        <button class="header__search" @click="toggleSearchBlock">
+      <div class="header__nav pointer">
+        <a class="header__search" href="javascript:void(0)" @click="toggleSearchBlock" title="Search User">
           <i class="fa fa-search"></i>
-        </button>
+        </a>
       </div>
     </div> 
     <div class="search" v-if="showSearchBlock">
@@ -25,10 +25,11 @@
         name="keyword" 
         placeholder="Type keyword to search"
         class="search__text"
+        @keyup.enter="doSearch"
         v-model="keyword"/>
       <button 
         class="search__btn"
-        @click="doSearch">
+        @click="doSearch"  title="Search User">
         <i class="fa fa-search"></i>
       </button>
     </div>
@@ -55,7 +56,8 @@ export default {
     doSearch: function () {
       if (this.keyword !== '') {
         this.showSearchBlock = false
-        this.$router.push('/search/' + this.keyword)
+        this.$router.push('/search/?q=' + this.keyword)
+        this.keyword = ''
       }
     }
   }
@@ -64,7 +66,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.pointer{
+  cursor: pointer;
+}
 .header {
   height: 60px;
 
@@ -115,6 +119,7 @@ export default {
     font-size: 30px;
   }
 }
+
 .search{
     position: fixed;
     top: 60px;
@@ -122,17 +127,17 @@ export default {
     left: 0;
     width: 100%;
     z-index: 10;
-    margin: 0;
-    background: #0096d9;
     text-align: center;
     color: #fff;
+    border-bottom: .5em solid #0096d9;
+    cursor: pointer;
     
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     &__text{
-      width: 90%;
+      width: 100%;
       padding: 12px;
       outline: none;
       border: 0;

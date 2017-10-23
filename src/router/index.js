@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Home from 'src/pages/Home'
 
 Vue.use(Router)
 
@@ -8,10 +9,10 @@ var router = new Router({
     {
       path: '/',
       name: 'Home',
-      component: view('Home')
+      component: Home
     },
     {
-      path: '/:user/profile/',
+      path: '/:user/profile',
       name: 'Profile',
       component: view('Profile')
     },
@@ -31,11 +32,23 @@ var router = new Router({
       component: view('Followers')
     },
     {
-      path: '/search/:keyword',
+      path: '/search',
       name: 'SearchResult',
       component: view('SearchResult')
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: view('About')
     }
   ]
+})
+
+router.afterEach((to, from) => {
+  if (window.ga) {
+    window.ga('set', 'page', to)
+    window.ga('send', 'pageview')
+  }
 })
 
 /**

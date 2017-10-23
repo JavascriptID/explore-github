@@ -1,27 +1,30 @@
 <template>
   <div class="grid__row">
 
-    Followers
-    
-    <user-profile-action 
-      :hideHomeIcon="true"
-      :userShowing="userShowing">
-    </user-profile-action>
-    
+    <user-list 
+      :list-user="userFollowers"
+      :user-showing="userShowing"
+      list-title="Followers of user">
+    </user-list>
+        
   </div>
 </template>
 
 <script>
-
-import UserProfileAction from 'components/UserProfileAction'
+import { mapGetters } from 'vuex'
+import UserList from 'components/UserList'
 
 export default {
-  name: 'followers',
-  components: {UserProfileAction},
+  name: 'FollowersPage',
+  components: {UserList},
   computed: {
     userShowing: function () {
       return this.$route.params.user
-    } 
+    },
+    ...mapGetters(['userFollowers'])  
+  },
+  activated () {
+    this.$store.dispatch('getUserFollowers', this.userShowing)
   }
 }
 

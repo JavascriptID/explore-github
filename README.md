@@ -1,4 +1,4 @@
-# explore-github
+# Vue-Github-Explorer
 
 [![License](https://img.shields.io/github/license/mazipan/explore-github.svg?maxAge=3600)](https://github.com/mazipan/explore-github) 
 [![Github Issue](https://img.shields.io/github/issues/mazipan/explore-github.svg?maxAge=3600)](https://github.com/mazipan/explore-github/issues) 
@@ -8,13 +8,39 @@
 [![Travis](https://img.shields.io/travis/mazipan/explore-github.svg)](https://travis-ci.org/mazipan/explore-github)
 [![codecov](https://codecov.io/gh/mazipan/explore-github/branch/master/graph/badge.svg)](https://codecov.io/gh/mazipan/explore-github)
 
-### Using Vue.js Framework
-![Vue](https://raw.githubusercontent.com/mazipan/explore-github/master/static/images/logo.png)
+[![Vue-Github-Explorer](https://raw.githubusercontent.com/mazipan/explore-github/master/static/images/github-explorer-blue.png)](https://mazipan.github.io/explore-github/)
 
-### Github API v3
-[https://developer.github.com/v3/](https://developer.github.com/v3/)
+### Technology Used
++ API by Github v3 [https://developer.github.com/v3/](https://developer.github.com/v3/)
++ Vue.js
++ Vue-Router
++ Vue-Resources
++ Webpack
 
-**Hope will usefull for you all.**
+### Code Structure
++ All `webpack` configuration for build production and development is in folder [build](https://github.com/mazipan/explore-github/tree/master/build)
++ Folder [config](https://github.com/mazipan/explore-github/tree/master/config) is project configuration that used by `webpack` build
++ All `Vue` code is in [src](https://github.com/mazipan/explore-github/tree/master/src) folder
++ Folder [static](https://github.com/mazipan/explore-github/tree/master/static) is for external js, css and public image
++ Folder [test](https://github.com/mazipan/explore-github/tree/master/test/unit) is used for unit test all `Vue Component`
++ Folder [www](https://github.com/mazipan/explore-github/tree/master/www) is setup for `pwa` need, like `manifest.json`, `sw.js`, etc
+
+### PWA Support
+![Lighthouse Result](https://raw.githubusercontent.com/mazipan/explore-github/master/lighthouse-result-2017-07-01.PNG)
+
+### Development
++ Checkout Code : `git checkout https://github.com/mazipan/explore-github.git`
++ Install dependency : `npm install` or `yarn install`
++ Run in local : `npm run dev`
++ Run unit test : `npm run unit`
++ Run ES linting : `npm run lint` 
++ Build for production : `npm run dist` then checkout branch `gh-pages` and copy folder `dist` to `root` directory
+
+## Contributing
+
+If you'd like to contribute, head to the [contributing guidelines](/CONTRIBUTING.md). Inside you'll find directions for opening issues, coding standards, and notes on development.
+ 
+### Hope this will be useful for you all.
 
 Contact Me :
 
